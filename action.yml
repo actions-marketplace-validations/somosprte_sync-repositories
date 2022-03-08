@@ -1,0 +1,28 @@
+name: Sync repositories
+author: Vinícius Gutierrez <srgutyerrez@gmail.com>
+description: Synchronize another repositories with this repository
+
+inputs:
+  distination:
+    description: Repository to receive data from you repository
+    required: true
+  username:
+    description: Your GitHub account username
+    required: true
+  token_secret:
+    description: Secret toeken registered in your GitHub Account
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        DESTINATION: ${{ inputs.destination }}
+        USERNAME: ${{ inputs.username }}
+        TOKEN_SECRET: ${{ inputs.token_secret }}
+
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
